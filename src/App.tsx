@@ -1,121 +1,112 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
+const features = [
+  {
+    title: 'تصميم متجاوب',
+    text: 'واجهة مناسبة للجوال وسطح المكتب مع توزيع أنيق ومريح.',
+  },
+  {
+    title: 'سرعة الأداء',
+    text: 'بنية خفيفة وتعليمات واضحة تضمن تجربة استخدام سلسة.',
+  },
+  {
+    title: 'تجربة واضحة',
+    text: 'رسائل وإجراءات مباشرة تجعل المستخدم يفهم كل نقطة بسهولة.',
+  },
+]
+
+const stats = [
+  { value: '24K+', label: 'مستخدم' },
+  { value: '4.9', label: 'تقييم' },
+  { value: '98%', label: 'رضا' },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="page-shell">
+      <header className="topbar">
+        <div className="brand-wrap">
+          <div className="brand-mark">A</div>
+          <span>Ali Studio</span>
         </div>
-        <div>
-          <h1>Ali</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
+
+        <nav className="nav">
+          <a href="#home">الرئيسية</a>
+          <a href="#features">المزايا</a>
+          <a href="#pricing">الأسعار</a>
+        </nav>
+
+        <button type="button" className="nav-button">
+          احجز الآن
         </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="hero-section" id="home">
+        <div className="hero-copy">
+          <span className="badge">واجهة حديثة</span>
+          <h1>أنشئ تجربة رقمية رائعة للمستخدمين.</h1>
+          <p>
+            صفحة بسيطة لكنها احترافية، مصممة لتبرز محتواك بوضوح وترك انطباع أول
+            ممتاز.
+          </p>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <div className="actions">
+            <button type="button" className="primary-btn">
+              ابدأ الآن
+            </button>
+            <button type="button" className="secondary-btn">
+              شاهد العرض
+            </button>
+          </div>
+
+          <div className="stats-row">
+            {stats.map((item) => (
+              <div key={item.label} className="stat-item">
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <div className="hero-panel" aria-label="لوحة تحكم">
+          <div className="panel-card main-card">
+            <div className="card-header">
+              <span className="dot green" />
+              <span className="dot yellow" />
+              <span className="dot red" />
+            </div>
+
+            <div className="chart-box">
+              <div className="chart-bars" aria-hidden="true">
+                <span style={{ height: '35%' }} />
+                <span style={{ height: '55%' }} />
+                <span style={{ height: '70%' }} />
+                <span style={{ height: '60%' }} />
+                <span style={{ height: '90%' }} />
+                <span style={{ height: '100%' }} />
+              </div>
+            </div>
+          </div>
+
+          <div className="panel-card info-card">
+            <p>إيرادات هذا الشهر</p>
+            <h3>$12,480</h3>
+            <span className="growth">+18.2% مقارنة بالأمس</span>
+          </div>
+        </div>
+      </main>
+
+      <section className="features" id="features">
+        {features.map((feature) => (
+          <article key={feature.title} className="feature-card">
+            <div className="feature-icon">✦</div>
+            <h2>{feature.title}</h2>
+            <p>{feature.text}</p>
+          </article>
+        ))}
+      </section>
+    </div>
   )
 }
 
