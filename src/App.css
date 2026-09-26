@@ -138,6 +138,17 @@
   margin-top: 32px;
 }
 
+.db-status {
+  margin-top: 18px;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #bbf7d0;
+  font-size: 0.9rem;
+}
+
 .stat-item {
   display: flex;
   flex-direction: column;
@@ -266,6 +277,75 @@
   margin: 0;
   color: #cbd5e1;
   line-height: 1.8;
+}
+
+.register-section {
+  margin-top: 42px;
+}
+
+.register-card {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 24px;
+  padding: 28px;
+}
+
+.register-card h2 {
+  margin: 0 0 10px;
+  color: #f8fafc;
+  font-size: 2rem;
+}
+
+.register-card p {
+  color: #cbd5e1;
+  margin: 0 0 20px;
+}
+
+.register-form {
+  display: grid;
+  gap: 18px;
+}
+
+.register-form label {
+  display: grid;
+  gap: 8px;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.8);
+  color: #f8fafc;
+  font-size: 1rem;
+}
+
+.register-form input:focus {
+  outline: 2px solid rgba(96, 165, 250, 0.75);
+  border-color: transparent;
+}
+
+.submit-btn {
+  width: fit-content;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e, #10b981);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-message {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  color: #bbf7d0;
 }
 
 @media (max-width: 860px) {

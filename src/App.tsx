@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { supabase } from './lib/supabase'
 import './App.css'
 
 const features = [
@@ -22,6 +24,54 @@ const stats = [
 ]
 
 function App() {
+  const [dbStatus, setDbStatus] = useState('جاري الاتصال...')
+  const [formData, setFormData] = useState({ name: '', email: '' })
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      const { error } = await supabase.from('profiles').select('id').limit(1)
+
+      if (error) {
+        setDbStatus('يرجى إنشاء جدول profiles في Supabase')
+        return
+      }
+
+      setDbStatus('تم الاتصال بقاعدة البيانات بنجاح')
+    }
+
+    checkConnection()
+  }, [])
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!formData.name.trim() || !formData.email.trim()) {
+      setMessage('يرجى تعبئة الاسم والبريد الإلكتروني')
+      return
+    }
+
+    const { error } = await supabase.from('profiles').insert([
+      {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+      },
+    ])
+
+    if (error) {
+      setMessage(`فشل التسجيل: ${error.message}`)
+      return
+    }
+
+    setMessage('تم التسجيل بنجاح في قاعدة البيانات')
+    setFormData({ name: '', email: '' })
+  }
+
   return (
     <div className="page-shell">
       <header className="topbar">
@@ -67,6 +117,8 @@ function App() {
               </div>
             ))}
           </div>
+
+          <div className="db-status">{dbStatus}</div>
         </div>
 
         <div className="hero-panel" aria-label="لوحة تحكم">
@@ -105,6 +157,43 @@ function App() {
             <p>{feature.text}</p>
           </article>
         ))}
+      </section>
+
+      <section className="register-section">
+        <div className="register-card">
+          <h2>تسجيل مستخدم جديد</h2>
+          <p>استخدم هذه الخانة لاختبار إضافة البيانات إلى قاعدة Supabase.</p>
+
+          <form onSubmit={handleSubmit} className="register-form">
+            <label>
+              الاسم
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="أدخل الاسم"
+              />
+            </label>
+
+            <label>
+              البريد الإلكتروني
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="example@email.com"
+              />
+            </label>
+
+            <button type="submit" className="submit-btn">
+              تسجيل
+            </button>
+          </form>
+
+          {message && <div className="form-message">{message}</div>}
+        </div>
       </section>
     </div>
   )
