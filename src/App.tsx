@@ -56,19 +56,24 @@ function App() {
       return
     }
 
-    const { error } = await supabase.from('profiles').insert([
-      {
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-      },
-    ])
+    setMessage('جاري إرسال البيانات إلى Supabase...')
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .insert([
+        {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+        },
+      ])
+      .select()
 
     if (error) {
       setMessage(`فشل التسجيل: ${error.message}`)
       return
     }
 
-    setMessage('تم التسجيل بنجاح في قاعدة البيانات')
+    setMessage(`تم التسجيل بنجاح: ${data?.[0]?.name ?? formData.name}`)
     setFormData({ name: '', email: '' })
   }
 
